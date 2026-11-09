@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAFFEINE LAB | 카페인 탐구 연구소</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --cream:#faf7f1;
+  --white:#fff;
+  --beige:#eee2d2;
+  --brown:#76543d;
+  --dark:#38291f;
+  --light-brown:#b99574;
+  --muted:#806f61;
+  --line:#e9dfd3;
+}
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:'Noto Sans KR',sans-serif;
+  background:var(--cream);
+  color:var(--dark);
+  line-height:1.8;
+  word-break:keep-all;
+}
+
+button { font-family:inherit; cursor:pointer; }
+
+header {
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(250,247,241,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav {
+  max-width:1100px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.logo {
+  font-size:20px;
+  font-weight:800;
+  color:var(--brown);
+  line-height:1.3;
+}
+
+.logo span {
+  display:block;
+  font-size:9px;
+  letter-spacing:2px;
+  color:var(--muted);
+}
+
+.nav-actions {
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.nav-actions button {
+  border:0;
+  background:var(--brown);
+  color:white;
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.hero {
+  max-width:1100px;
+  margin:auto;
+  padding:75px 25px 65px;
+}
+
+.hero-label {
+  display:inline-block;
+  color:var(--brown);
+  background:var(--beige);
+  border-radius:30px;
+  padding:7px 17px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:25px;
+}
+
+.hero h1 {
+  font-size:clamp(38px,6vw,65px);
+  line-height:1.3;
+  letter-spacing:-2px;
+  margin-bottom:22px;
+}
+
+.hero h1 span { color:#a77c58; }
+
+.hero p {
+  max-width:650px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:2;
+}
+
+.hero-bottom {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:30px;
+}
+
+.main-btn,.sub-btn {
+  padding:13px 22px;
+  border-radius:9px;
+  font-weight:700;
+  font-size:13px;
+}
+
+.main-btn {
+  background:var(--brown);
+  color:white;
+  border:0;
+}
+
+.sub-btn {
+  background:white;
+  color:var(--brown);
+  border:1px solid var(--line);
+}
+
+.container {
+  max-width:1000px;
+  margin:auto;
+  padding:30px 24px 80px;
+}
+
+.section {
+  margin-bottom:65px;
+  scroll-margin-top:100px;
+}
+
+.section-tag {
+  color:#a77c58;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+
+.section h2 {
+  font-size:clamp(25px,4vw,35px);
+  line-height:1.45;
+  margin-bottom:15px;
+  letter-spacing:-1px;
+}
+
+.section-intro {
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:27px;
+}
+
+.card,.lab-card {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:25px;
+  margin-bottom:17px;
+  box-shadow:0 5px 20px rgba(80,55,30,.035);
+}
+
+.card h3,.lab-card h3 {
+  font-size:18px;
+  margin-bottom:12px;
+  color:var(--brown);
+}
+
+.card p,.lab-card p {
+  font-size:14px;
+  color:#66584c;
+  line-height:2;
+}
+
+.highlight {
+  background:#f4ede4;
+  border-left:4px solid #a77c58;
+  border-radius:5px;
+  padding:18px 21px;
+  margin:18px 0;
+  font-size:13px;
+  line-height:2;
+  color:#594536;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+
+.small-card {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:21px;
+}
+
+.small-card .emoji {
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.small-card h3 {
+  font-size:16px;
+  color:var(--brown);
+  margin-bottom:7px;
+}
+
+.small-card p {
+  font-size:13px;
+  line-height:1.9;
+  color:var(--muted);
+}
+
+.flow {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  margin:22px 0;
+}
+
+.flow-item {
+  width:100%;
+  max-width:480px;
+  text-align:center;
+  background:#f5eee5;
+  padding:16px;
+  border-radius:12px;
+  border:1px solid #e8d9c8;
+  font-size:13px;
+  font-weight:700;
+  color:var(--brown);
+}
+
+.flow-arrow {
+  color:#a77c58;
+  font-size:22px;
+  font-weight:800;
+}
+
+.diagram {
+  background:#f8f4ee;
+  border-radius:16px;
+  padding:24px;
+  margin:20px 0;
+  text-align:center;
+}
+
+.diagram-title {
+  font-weight:800;
+  color:var(--brown);
+  margin-bottom:16px;
+}
+
+.diagram-row {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.diagram-box {
+  background:white;
+  border:1px solid #ddcbb8;
+  border-radius:12px;
+  padding:15px;
+  min-width:120px;
+  font-size:13px;
+  color:var(--brown);
+  font-weight:700;
+}
+
+.diagram-box.active {
+  background:#e8d5c0;
+  border-color:#b99574;
+}
+
+.diagram-note {
+  color:var(--muted);
+  font-size:11px;
+  margin-top:15px;
+}
+
+.table-wrap {
+  overflow-x:auto;
+  margin:18px 0;
+  border-radius:12px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  font-size:13px;
+  min-width:430px;
+}
+
+th,td {
+  border:1px solid var(--line);
+  padding:12px;
+  text-align:left;
+  line-height:1.8;
+}
+
+th {
+  background:var(--beige);
+  color:var(--brown);
+}
+
+td { color:#66584c; }
+
+.gene-card {
+  background:#f5eee5;
+  border-radius:15px;
+  padding:22px;
+  margin-bottom:15px;
+}
+
+.gene-card h3 {
+  color:var(--brown);
+  margin-bottom:8px;
+  font-size:19px;
+}
+
+.gene-name {
+  font-size:11px;
+  color:#a77c58;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+.next-page {
+  background:var(--brown);
+  color:white;
+  border-radius:22px;
+  padding:35px 25px;
+  text-align:center;
+  margin-top:55px;
+}
+
+.next-page h2 {
+  font-size:25px;
+  margin-bottom:12px;
+}
+
+.next-page p {
+  color:#f1e5d9;
+  font-size:13px;
+  line-height:2;
+  margin-bottom:20px;
+}
+
+.next-page button {
+  background:white;
+  color:var(--brown);
+  border:0;
+  border-radius:10px;
+  padding:13px 22px;
+  font-weight:800;
+}
+
+.sources {
+  background:white;
+  padding:23px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  margin-top:30px;
+}
+
+.sources h3 {
+  color:var(--brown);
+  margin-bottom:12px;
+}
+
+.sources a {
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  line-height:2;
+  overflow-wrap:anywhere;
+  margin-bottom:7px;
+}
+
+.lab-field { margin-bottom:17px; }
+
+.lab-field label {
+  display:block;
+  color:var(--brown);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.lab-field input,.lab-field select {
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#fffdf9;
+  color:var(--dark);
+  font-family:inherit;
+  font-size:14px;
+}
+
+.lab-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.lab-check-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.lab-check {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#faf7f1;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  color:var(--brown);
+  font-size:13px;
+}
+
+.lab-check input,.lab-radio input {
+  accent-color:var(--brown);
+}
+
+.lab-question {
+  background:#faf7f1;
+  padding:16px;
+  border-radius:11px;
+  margin-bottom:15px;
+}
+
+.lab-question strong {
+  display:block;
+  color:var(--brown);
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+.lab-radio {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#66584c;
+  font-size:13px;
+  margin:9px 0;
+}
+
+.lab-button {
+  display:block;
+  width:100%;
+  border:0;
+  background:var(--brown);
+  color:white;
+  padding:15px;
+  border-radius:10px;
+  font-family:inherit;
+  font-weight:800;
+  font-size:14px;
+  margin-top:15px;
+}
+
+.lab-page-nav {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:30px;
+}
+
+.lab-page-nav button {
+  flex:1;
+  border:1px solid var(--line);
+  background:white;
+  color:var(--brown);
+  padding:13px;
+  border-radius:9px;
+  font-family:inherit;
+  font-weight:700;
+}
+
+.result-item {
+  background:#faf7f1;
+  border-radius:10px;
+  padding:14px;
+}
+
+.result-item span {
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:4px;
+}
+
+.result-item strong {
+  color:var(--brown);
+  font-size:14px;
+}
+
+.bar-row { margin:16px 0; }
+
+.bar-heading {
+  display:flex;
+  justify-content:space-between;
+  color:var(--brown);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.bar-bg {
+  height:12px;
+  background:#eee2d2;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.bar-fill {
+  height:100%;
+  width:50%;
+  background:#a98262;
+  border-radius:20px;
+  transition:width .5s ease;
+}
+
+.bar-fill.second { background:#76543d; }
+
+.quiz-option {
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:white;
+  color:var(--brown);
+  font-family:inherit;
+  font-size:13px;
+  line-height:1.8;
+  margin-top:10px;
+}
+
+.quiz-option:hover { background:#f5eee5; }
+
+.quiz-feedback {
+  background:#f4ede4;
+  border-radius:10px;
+  padding:15px;
+  margin-top:15px;
+  color:#594536;
+  font-size:13px;
+  line-height:1.9;
+}
+
+/* =====================================
+   4페이지 가독성 개선 디자인
+   기존 문구, 계산식, 기능은 유지
+===================================== */
+
+#page4 {
+  line-height:1.85;
+}
+
+#page4 .section-intro {
+  background:#f4ede4;
+  border-radius:12px;
+  padding:17px 19px;
+  line-height:1.9;
+  color:#66584c;
+}
+
+/* 4페이지 각 영역 카드 */
+#page4 > .lab-card {
+  padding:27px;
+  margin-bottom:24px;
+  border-radius:19px;
+  border:1px solid #e9dfd3;
+  box-shadow:0 5px 18px rgba(80,55,30,.045);
+}
+
+/* 영역 번호 */
+#page4 .lab-card > .section-tag {
+  display:inline-block;
+  padding:5px 12px;
+  background:#f3e9dc;
+  border-radius:20px;
+  font-size:10px;
+  letter-spacing:1.5px;
+  margin-bottom:12px;
+}
+
+/* 영역 제목 */
+#page4 .lab-card > h3 {
+  font-size:20px;
+  line-height:1.5;
+  margin-bottom:17px;
+  color:#76543d;
+}
+
+/* 응답 정보 */
+#profileResult .lab-grid {
+  gap:11px;
+}
+
+#profileResult .result-item {
+  padding:17px;
+  background:#faf6f0;
+  border:1px solid #eee3d7;
+  border-radius:13px;
+}
+
+#profileResult .result-item span {
+  font-size:12px;
+  color:#927d69;
+  margin-bottom:7px;
+}
+
+#profileResult .result-item strong {
+  font-size:14px;
+  line-height:1.7;
+  color:#49392d;
+  overflow-wrap:anywhere;
+}
+
+/* 유전자 설명 */
+#page4 .gene-card {
+  background:#faf6f0;
+  border:1px solid #eadfd2;
+  border-radius:15px;
+  padding:22px;
+  margin:14px 0;
+}
+
+#page4 .gene-name {
+  display:inline-block;
+  background:#eee2d2;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:10px;
+  margin-bottom:10px;
+}
+
+#page4 .gene-card h3 {
+  font-size:17px;
+  line-height:1.6;
+  color:#62462f;
+  margin-bottom:10px;
+}
+
+#page4 .gene-card h3::before {
+  content:"🧬 ";
+}
+
+#page4 .gene-card p {
+  font-size:13px;
+  line-height:1.95;
+  color:#66584c;
+}
+
+/* 유전자 관련 설명 문단 */
+#page4 .lab-card > p {
+  font-size:13px;
+  line-height:1.95;
+  color:#66584c;
+}
+
+/* 결과 안내 박스 */
+#page4 .highlight {
+  background:#f5eee5;
+  border-left:4px solid #b99574;
+  border-radius:10px;
+  padding:18px 20px;
+  margin:20px 0;
+  font-size:13px;
+  line-height:1.95;
+}
+
+#page4 .highlight strong {
+  display:inline-block;
+  font-size:14px;
+  color:#63462f;
+  margin-bottom:5px;
+}
+
+/* 결과 그래프 */
+#page4 .bar-row {
+  background:#faf7f2;
+  border:1px solid #eee3d7;
+  border-radius:13px;
+  padding:17px;
+  margin:13px 0;
+}
+
+#page4 .bar-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  color:#594536;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:13px;
+}
+
+#page4 .bar-heading span:first-child {
+  flex:1;
+}
+
+#page4 .bar-heading span:last-child {
+  color:#8b6241;
+  font-size:17px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+#page4 .bar-bg {
+  height:15px;
+  background:#e9dfd3;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+#page4 .bar-fill {
+  height:100%;
+  background:linear-gradient(90deg,#b99574,#d9b995);
+  border-radius:20px;
+  transition:width .6s ease;
+}
+
+#page4 .bar-fill.second {
+  background:linear-gradient(90deg,#806f61,#a99480);
+}
+
+/* 두 유전자 비교 영역의 제목 */
+#page4 #page4GeneTitle {
+  display:none;
+}
+
+/* 생활 습관 조언 */
+#personalAdvice .highlight {
+  background:#f8f5ef;
+  border-left-color:#91a59a;
+  margin:13px 0;
+  padding:18px;
+}
+
+#personalAdvice .highlight h3 {
+  font-size:15px;
+  color:#526b5c;
+  margin-bottom:8px;
+}
+
+#personalAdvice .highlight h3::before {
+  content:"🌿 ";
+}
+
+#personalAdvice .highlight p {
+  font-size:13px;
+  line-height:1.9;
+  margin:0;
+}
+
+/* 퀴즈 */
+#page4 #quizArea {
+  background:#faf7f2;
+  border:1px solid #eee3d7;
+  border-radius:15px;
+  padding:21px;
+}
+
+#page4 #quizArea h3 {
+  font-size:16px;
+  line-height:1.8;
+  color:#49392d;
+  margin:14px 0;
+}
+
+#page4 .quiz-option {
+  background:white;
+  border:1px solid #e8d9c8;
+  border-radius:11px;
+  padding:15px;
+  line-height:1.85;
+  font-size:13px;
+  transition:background .2s ease;
+}
+
+#page4 .quiz-option:hover {
+  background:#f3e9dc;
+}
+
+#page4 .quiz-feedback {
+  background:#f3e9dc;
+  border:1px solid #ead9c6;
+  border-radius:12px;
+  padding:17px;
+  line-height:1.9;
+}
+
+/* 퀴즈 완료 화면 */
+#page4 #quizArea .diagram {
+  background:#f3e9dc;
+  border:1px solid #ead9c6;
+  border-radius:15px;
+}
+
+/* 페이지 이동 버튼 */
+#page4 .lab-page-nav button {
+  padding:14px;
+  border-radius:11px;
+  font-size:13px;
+}
+
+/* 모바일 화면 */
+@media(max-width:650px) {
+  .grid,.lab-grid,.lab-check-grid {
+    grid-template-columns:1fr;
+  }
+
+  .hero { padding-top:55px; }
+  .container { padding-left:16px; padding-right:16px; }
+  .card,.lab-card { padding:19px; }
+  .nav { padding:12px; }
+  .logo { font-size:16px; }
+  .nav-actions button { padding:7px 9px; font-size:10px; }
+
+  #page4 > .lab-card {
+    padding:19px;
+  }
+
+  #page4 .bar-row {
+    padding:14px;
+  }
+
+  #page4 .bar-heading {
+    font-size:12px;
+  }
+
+  #page4 .bar-heading span:last-child {
+    font-size:15px;
+  }
+
+  #page4 #quizArea {
+    padding:15px;
+  }
+
+  #page4 .lab-page-nav {
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      CAFFEINE LAB
+      <span>UNDERSTANDING CAFFEINE</span>
+    </div>
+
+    <div class="nav-actions">
+      <button onclick="goTo('intro')">1·2페이지</button>
+      <button onclick="goTo('page3')">3페이지</button>
+      <button onclick="goTo('page4')">4페이지</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-label">CAFFEINE & GENETICS PROJECT</div>
+
+  <h1>같은 카페인,<br><span>다른 반응.</span></h1>
+
+  <p>
+    누군가는 커피를 마시면 잠이 깨지만,
+    누군가는 심장이 두근거리거나 밤늦게까지 잠들지 못합니다.
+    왜 사람마다 카페인에 대한 반응은 다르게 나타날까요?
+    그 이유를 알아보기 위해 카페인의 정체와 작용 원리부터 살펴봅시다.
+  </p>
+
+  <div class="hero-bottom">
+    <button class="main-btn" onclick="goTo('intro')">카페인 알아보기 →</button>
+    <button class="sub-btn" onclick="goTo('mechanism')">작용 원리 살펴보기</button>
+  </div>
+</section>
+
+<main class="container">
+
+<!-- 1·2페이지 기존 학습 내용 -->
+
+<section class="section" id="intro">
+  <div class="section-tag">01. WHAT IS CAFFEINE?</div>
+  <h2>카페인이란 무엇일까?</h2>
+  <p class="section-intro">
+    우리 일상에서 쉽게 접하는 카페인.
+    하지만 카페인이 어떤 물질이고 우리 몸에 어떤 영향을 주는지 정확히 알고 있나요?
+  </p>
+
+  <div class="card">
+    <h3>☕ 카페인의 정의</h3>
+    <p>
+      카페인(Caffeine)은 커피나무, 차나무, 카카오 등의 식물에
+      자연적으로 존재하는 알칼로이드 계열의 물질입니다.
+      화학적으로는 메틸잔틴(Methylxanthine) 계열에 속하며,
+      분자식은 C₈H₁₀N₄O₂입니다.
+    </p>
+    <p style="margin-top:12px">
+      카페인은 중추신경계에 작용하는 각성 물질로,
+      뇌에서 졸음을 느끼게 하는 신호에 영향을 주어
+      일시적으로 졸음을 줄이고 주의력을 높이는 효과를 나타낼 수 있습니다.
+    </p>
+  </div>
+
+  <div class="highlight">
+    <strong>핵심 개념</strong><br>
+    카페인은 우리 몸에 에너지를 직접 공급하는 물질이 아닙니다.
+    뇌에서 졸음을 유발하는 신호를 방해함으로써
+    피로감을 덜 느끼게 하는 역할을 합니다.
+  </div>
+
+  <div class="card">
+    <h3>카페인의 기본 정보</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>물질명</td><td>카페인 (Caffeine)</td></tr>
+        <tr><td>화학식</td><td>C₈H₁₀N₄O₂</td></tr>
+        <tr><td>분자량</td><td>약 194.19 g/mol</td></tr>
+        <tr><td>물질 분류</td><td>알칼로이드, 메틸잔틴 계열</td></tr>
+        <tr><td>주요 작용</td><td>아데노신 수용체 길항 작용</td></tr>
+        <tr><td>주요 대사 기관</td><td>간</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>카페인은 어디에 들어 있을까?</h3>
+    <p>카페인은 커피뿐 아니라 다양한 식물과 가공식품 및 음료에 포함되어 있습니다.</p>
+  </div>
+
+  <div class="grid">
+    <div class="small-card">
+      <div class="emoji">☕</div>
+      <h3>커피</h3>
+      <p>커피나무의 씨앗을 볶아 만든 음료로, 대표적인 카페인 섭취원입니다.</p>
+    </div>
+    <div class="small-card">
+      <div class="emoji">🍵</div>
+      <h3>차</h3>
+      <p>녹차, 홍차, 우롱차 등 차나무 잎을 이용한 음료에도 카페인이 들어 있습니다.</p>
+    </div>
+    <div class="small-card">
+      <div class="emoji">🥤</div>
+      <h3>탄산음료 및 에너지 음료</h3>
+      <p>일부 콜라와 에너지 음료에는 카페인이 첨가되어 있습니다.</p>
+    </div>
+    <div class="small-card">
+      <div class="emoji">🍫</div>
+      <h3>초콜릿 및 코코아</h3>
+      <p>카카오에는 카페인이 포함되어 있으며 테오브로민도 존재합니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mechanism">
+  <div class="section-tag">02. HOW DOES IT WORK?</div>
+  <h2>카페인은 우리 몸에서 어떻게 작용할까?</h2>
+  <p class="section-intro">
+    카페인의 각성 효과를 이해하려면 먼저 뇌에서 졸음과 관련된 신호를 전달하는 아데노신을 알아야 합니다.
+  </p>
+
+  <div class="card">
+    <h3>① 아데노신이란?</h3>
+    <p>
+      아데노신(Adenosine)은 우리 몸의 세포에서 만들어지는 물질로,
+      에너지 대사와 신경 활동 조절 등 다양한 생리 작용에 관여합니다.
+      뇌에서는 깨어 있는 시간이 길어지면서 아데노신의 작용이 증가하고,
+      아데노신이 신경세포의 수용체에 결합하면 졸음과 피로감을 느끼는 데 영향을 줍니다.
+    </p>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">카페인이 없을 때의 작용</div>
+    <div class="flow">
+      <div class="flow-item">아데노신 생성 및 작용 증가</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">아데노신이 수용체에 결합</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">신경 활동 조절</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">졸음과 피로감을 느끼는 데 영향</div>
+    </div>
+    <div class="diagram-note">※ 아데노신의 작용을 단순화한 개념도입니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>② 아데노신 수용체란?</h3>
+    <p>
+      수용체(Receptor)는 세포의 표면이나 내부에 존재하며,
+      특정 물질과 결합하여 세포의 반응을 조절하는 단백질입니다.
+      아데노신 수용체 중 A1 수용체와 A2A 수용체는
+      중추신경계에서 중요한 역할을 합니다.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>③ 카페인은 아데노신 수용체를 어떻게 변화시킬까?</h3>
+    <p>
+      카페인은 아데노신과 화학적 구조가 일부 유사하여
+      아데노신 수용체에 결합할 수 있습니다.
+      하지만 아데노신과 달리 수용체를 활성화하는 대신
+      아데노신이 결합하는 것을 방해합니다.
+      이러한 작용을 <strong>경쟁적 길항 작용</strong>이라고 합니다.
+    </p>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">카페인이 있을 때의 작용</div>
+    <div class="diagram-row">
+      <div class="diagram-box">아데노신</div>
+      <div style="font-size:22px;color:#a77c58">+</div>
+      <div class="diagram-box active">카페인</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="diagram-box active">아데노신 수용체에 카페인이 결합</div>
+    <div class="flow-arrow">↓</div>
+    <div class="diagram-box">아데노신의 수용체 결합 방해</div>
+    <div class="flow-arrow">↓</div>
+    <div class="diagram-box active">졸음 신호 감소 및 각성 효과</div>
+    <div class="diagram-note">※ 실제 신경전달 과정은 이보다 복잡하며, 핵심 원리를 단순화한 그림입니다.</div>
+  </div>
+
+  <div class="highlight">
+    <strong>꼭 기억하기!</strong><br>
+    카페인은 피로의 원인을 완전히 없애는 것이 아니라
+    아데노신의 작용을 방해하여 졸음을 덜 느끼게 합니다.
+    따라서 카페인을 섭취해 각성 상태가 유지되더라도
+    수면 부족이나 신체적 피로가 해결되는 것은 아닙니다.
+  </div>
+</section>
+
+<section class="section" id="metabolism">
+  <div class="section-tag">03. ABSORPTION & METABOLISM</div>
+  <h2>카페인은 몸속에서 어떻게 분해될까?</h2>
+  <p class="section-intro">
+    카페인은 섭취된 이후 흡수되어 혈액을 통해 이동하고,
+    주로 간에서 대사됩니다.
+  </p>
+
+  <div class="card">
+    <h3>① 카페인의 흡수</h3>
+    <p>
+      카페인을 섭취하면 소화관을 통해 빠르게 흡수되어 혈액으로 이동합니다.
+      이후 혈액을 따라 온몸으로 분포하며 혈액-뇌 장벽도 통과하여 뇌에 도달할 수 있습니다.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>② 간에서 일어나는 카페인 대사</h3>
+    <p>
+      흡수된 카페인은 주로 간에서 대사됩니다.
+      이 과정에서 중요한 역할을 하는 것이 <strong>CYP1A2 효소</strong>입니다.
+      CYP1A2는 사이토크롬 P450 계열에 속하는 효소로,
+      카페인의 탈메틸화 반응 등에 관여합니다.
+    </p>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">카페인의 주요 대사 과정</div>
+    <div class="flow">
+      <div class="flow-item">카페인 섭취</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">소화관에서 흡수</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">혈액을 통해 온몸으로 이동</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">간에서 CYP1A2 효소가 대사에 관여</div>
+      <div class="flow-arrow">↓</div>
+      <div class="grid" style="width:100%">
+        <div class="small-card"><h3>파라잔틴</h3><p>Paraxanthine · 주요 대사산물</p></div>
+        <div class="small-card"><h3>테오브로민</h3><p>Theobromine</p></div>
+        <div class="small-card"><h3>테오필린</h3><p>Theophylline</p></div>
+        <div class="small-card"><h3>기타 대사산물</h3><p>여러 대사 과정을 거쳐 배출</p></div>
+      </div>
+    </div>
+    <div class="diagram-note">※ 대사 경로를 단순화한 그림입니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>③ CYP1A2 효소의 중요성</h3>
+    <p>
+      CYP1A2는 카페인 대사에서 핵심적인 역할을 합니다.
+      이 효소의 활성 정도에 따라 카페인이 체내에서 분해되는 속도에 차이가 나타날 수 있습니다.
+      효소 활성이 상대적으로 높으면 카페인이 비교적 빠르게 대사될 수 있으며,
+      활성이 낮으면 카페인이 체내에 더 오래 남을 가능성이 있습니다.
+      이러한 차이는 유전적 요인뿐 아니라 생활 습관과 환경의 영향도 받습니다.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="difference">
+  <div class="section-tag">04. INDIVIDUAL DIFFERENCES</div>
+  <h2>왜 사람마다 카페인 반응이 다를까?</h2>
+  <p class="section-intro">
+    같은 양의 카페인을 섭취해도 사람마다 나타나는 반응은 다를 수 있습니다.
+  </p>
+
+  <div class="card">
+    <h3>① 카페인 대사 속도의 차이</h3>
+    <p>
+      사람마다 카페인을 분해하는 속도는 다릅니다.
+      카페인 대사가 상대적으로 빠른 사람은 혈액 속 카페인 농도가 비교적 빨리 감소할 수 있습니다.
+      반대로 대사가 느린 사람은 카페인이 더 오래 체내에 남아 있을 수 있습니다.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>② 카페인 민감도의 차이</h3>
+    <p>
+      카페인 민감도는 카페인을 섭취했을 때 신체가 얼마나 민감하게 반응하는지를 의미합니다.
+      어떤 사람은 적은 양에도 불면이나 불안감을 경험할 수 있지만,
+      다른 사람은 비슷한 양을 섭취해도 상대적으로 뚜렷한 반응을 느끼지 못할 수 있습니다.
+      이는 대사 속도와 구분되는 개념입니다.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="small-card">
+      <div class="emoji">⏱️</div>
+      <h3>대사 속도</h3>
+      <p>카페인이 체내에서 얼마나 빠르게 분해되고 제거되는지와 관련됩니다.</p>
+    </div>
+    <div class="small-card">
+      <div class="emoji">🧠</div>
+      <h3>민감도</h3>
+      <p>카페인이 신경계에 작용했을 때 신체가 얼마나 민감하게 반응하는지와 관련됩니다.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>중요한 차이!</strong><br>
+    카페인을 빠르게 분해하는 사람이라고 해서 반드시 카페인에 둔감한 것은 아닙니다.
+    대사 속도와 민감도는 서로 다른 개념입니다.
+  </div>
+</section>
+
+<section class="section" id="gene">
+  <div class="section-tag">05. GENETICS & CAFFEINE</div>
+  <h2>카페인 반응과 관련된 유전자</h2>
+  <p class="section-intro">
+    개인별 카페인 반응의 차이를 설명하는 여러 요인 중 이번 탐구에서는 특히 유전자에 주목했습니다.
+  </p>
+
+  <div class="gene-card">
+    <div class="gene-name">GENE 01</div>
+    <h3>CYP1A2</h3>
+    <p>
+      CYP1A2는 간에서 카페인 대사에 중요한 역할을 하는 효소를 만드는 유전자입니다.
+      이 유전자의 특정 변이는 효소의 발현이나 활성에 영향을 주어
+      카페인 대사 속도의 개인차와 관련될 수 있습니다.
+    </p>
+  </div>
+
+  <div class="gene-card">
+    <div class="gene-name">GENE 02</div>
+    <h3>ADORA2A</h3>
+    <p>
+      ADORA2A는 아데노신 A2A 수용체를 만드는 유전자입니다.
+      이 수용체는 뇌의 신경 활동 조절에 관여하며,
+      카페인은 이 수용체에 작용하여 각성 효과를 나타냅니다.
+      ADORA2A의 특정 변이는 카페인 섭취 후 불안감이나 수면 관련 반응 등
+      민감도의 개인차와 관련될 가능성이 연구되고 있습니다.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>두 유전자의 차이 이해하기</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>CYP1A2</th><th>ADORA2A</th></tr>
+        <tr><td>주요 역할</td><td>카페인 대사</td><td>아데노신 수용체 형성</td></tr>
+        <tr><td>관련 과정</td><td>카페인의 분해</td><td>카페인의 신경계 작용</td></tr>
+        <tr><td>탐구 관점</td><td>대사 속도</td><td>민감도와 관련된 반응</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>유전자 분석 시 주의할 점</strong><br>
+    유전자형은 개인의 카페인 반응을 이해하는 데 참고가 될 수 있지만,
+    실제 반응을 완벽하게 예측하지는 못합니다.
+    나이, 수면 습관, 섭취량, 건강 상태, 환경적 요인 등도 함께 고려해야 합니다.
+  </div>
+</section>
+
+<section class="section" id="summary">
+  <div class="section-tag">06. WHAT WE LEARNED</div>
+  <h2>지금까지 배운 내용 정리하기</h2>
+
+  <div class="card">
+    <p>1. 카페인은 중추신경계에 작용하는 각성 물질이다.</p>
+    <p style="margin-top:10px">2. 카페인은 아데노신 수용체를 차단하여 졸음과 관련된 신호 전달에 영향을 준다.</p>
+    <p style="margin-top:10px">3. 카페인은 주로 간에서 CYP1A2 효소에 의해 대사된다.</p>
+    <p style="margin-top:10px">4. 사람마다 카페인 대사 속도와 민감도가 다르게 나타날 수 있다.</p>
+    <p style="margin-top:10px">5. CYP1A2와 ADORA2A 등의 유전자 변이는 이러한 개인차와 관련이 있을 수 있다.</p>
+  </div>
+
+  <div class="next-page">
+    <div style="font-size:34px;margin-bottom:12px">🧬</div>
+    <h2>그렇다면 나는 어떨까?</h2>
+    <p>
+      이제 카페인의 작용 원리를 이해했다면,
+      나의 카페인 섭취 습관과 반응을 직접 살펴봅시다.
+    </p>
+    <button onclick="goTo('page3')">나의 카페인 반응 알아보기 →</button>
+  </div>
+</section>
+
+<!-- 3페이지 -->
+
+<section class="section" id="page3">
+
+  <div class="section-tag">07. MY CAFFEINE PROFILE</div>
+  <h2>나의 카페인 섭취 습관 알아보기</h2>
+
+  <p class="section-intro">
+    카페인에 대한 반응은 유전적 요인뿐 아니라 섭취 습관과 수면 시간 등
+    다양한 요인의 영향을 받습니다. 나의 생활 습관을 입력해 봅시다.
+  </p>
+
+  <div class="highlight">
+    <strong>📌 입력 안내</strong><br>
+    아래 설문은 카페인 섭취 습관을 이해하기 위한 교육용 자료입니다.
+    설문만으로 실제 유전자형을 확인하거나 의학적 진단을 내릴 수는 없습니다.
+  </div>
+
+  <form id="caffeineForm">
+
+    <div class="lab-card">
+      <div class="section-tag">01. BASIC INFORMATION</div>
+      <h3>👤 기본 정보</h3>
+      <p class="lab-description">나의 기본적인 생활 정보를 입력해 주세요.</p>
+
+      <div class="lab-grid">
+        <div class="lab-field">
+          <label for="userAge">나이</label>
+          <input type="number" id="userAge" min="1" max="100" placeholder="예: 17" required>
+        </div>
+
+        <div class="lab-field">
+          <label for="userSleep">평균 수면 시간</label>
+          <input type="number" id="userSleep" min="0" max="24" step="0.5" placeholder="예: 7" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="lab-card">
+      <div class="section-tag">02. CAFFEINE INTAKE</div>
+      <h3>☕ 카페인 섭취 습관</h3>
+      <p class="lab-description">평소 섭취하는 음료와 빈도를 선택해 주세요.</p>
+
+      <div class="lab-field">
+        <label>주로 마시는 카페인 음료 (복수 선택)</label>
+
+        <div class="lab-check-grid">
+          <label class="lab-check"><input type="checkbox" name="drink" value="편의점 커피"> 편의점 커피</label>
+          <label class="lab-check"><input type="checkbox" name="drink" value="아메리카노"> 아메리카노</label>
+          <label class="lab-check"><input type="checkbox" name="drink" value="라떼"> 카페 라떼</label>
+          <label class="lab-check"><input type="checkbox" name="drink" value="에너지 음료"> 에너지 음료</label>
+          <label class="lab-check"><input type="checkbox" name="drink" value="차"> 녹차·홍차 등 차</label>
+          <label class="lab-check"><input type="checkbox" name="drink" value="탄산음료"> 카페인 함유 탄산음료</label>
+          <label class="lab-check"><input type="checkbox" name="drink" value="초콜릿 음료"> 초콜릿 음료</label>
+          <label class="lab-check"><input type="checkbox" name="drink" value="기타"> 기타</label>
+        </div>
+      </div>
+
+      <div class="lab-field">
+        <label for="drinkFrequency">카페인 음료 섭취 빈도</label>
+        <select id="drinkFrequency" required>
+          <option value="">선택해 주세요</option>
+          <option>거의 마시지 않음</option>
+          <option>주 1~2회</option>
+          <option>주 3~4회</option>
+          <option>거의 매일</option>
+          <option>하루 여러 번</option>
+        </select>
+      </div>
+
+      <div class="lab-field">
+        <label for="drinkAmount">하루 평균 카페인 음료 섭취량</label>
+        <select id="drinkAmount" required>
+          <option value="">선택해 주세요</option>
+          <option>마시지 않음</option>
+          <option>1잔</option>
+          <option>2잔</option>
+          <option>3잔 이상</option>
+          <option>일정하지 않음</option>
+        </select>
+      </div>
+
+      <div class="lab-field">
+        <label for="drinkTime">주로 카페인을 섭취하는 시간</label>
+        <select id="drinkTime" required>
+          <option value="">선택해 주세요</option>
+          <option>오전</option>
+          <option>점심 무렵</option>
+          <option>오후</option>
+          <option>저녁</option>
+          <option>시간이 일정하지 않음</option>
+          <option>섭취하지 않음</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="lab-card">
+      <div class="section-tag">03. CAFFEINE RESPONSE</div>
+      <h3>🧠 카페인 섭취 후 나타나는 반응</h3>
+      <p class="lab-description">카페인을 마신 뒤 경험한 적이 있는 반응을 선택해 주세요.</p>
+
+      <div class="lab-question">
+        <strong>① 카페인을 마신 후 잠들기 어려웠던 경험이 있나요?</strong>
+        <label class="lab-radio"><input type="radio" name="sleepEffect" value="있음" required> 있다</label>
+        <label class="lab-radio"><input type="radio" name="sleepEffect" value="없음"> 없다</label>
+        <label class="lab-radio"><input type="radio" name="sleepEffect" value="잘 모르겠음"> 잘 모르겠다</label>
+      </div>
+
+      <div class="lab-question">
+        <strong>② 카페인 섭취 후 심장이 두근거리거나 불안감을 느낀 적이 있나요?</strong>
+        <label class="lab-radio"><input type="radio" name="anxietyEffect" value="있음" required> 있다</label>
+        <label class="lab-radio"><input type="radio" name="anxietyEffect" value="없음"> 없다</label>
+        <label class="lab-radio"><input type="radio" name="anxietyEffect" value="잘 모르겠음"> 잘 모르겠다</label>
+      </div>
+
+      <div class="lab-question">
+        <strong>③ 카페인을 마신 후 각성 효과가 오래 지속된다고 느끼나요?</strong>
+        <label class="lab-radio"><input type="radio" name="durationEffect" value="오래 지속됨" required> 오래 지속되는 편이다</label>
+        <label class="lab-radio"><input type="radio" name="durationEffect" value="짧게 지속됨"> 비교적 짧게 지속되는 편이다</label>
+        <label class="lab-radio"><input type="radio" name="durationEffect" value="잘 모르겠음"> 잘 모르겠다</label>
+      </div>
+    </div>
+
+    <button type="submit" class="lab-button">입력 완료하고 분석 결과 확인하기 →</button>
+  </form>
+
+  <div class="lab-page-nav">
+    <button onclick="goTo('summary')">← 이전 페이지</button>
+    <button onclick="goTo('page4')">4페이지로 이동 →</button>
+  </div>
+
+</section>
+
+<!-- 4페이지 -->
+
+<section class="section" id="page4">
+
+  <div class="section-tag">08. MY RESULT</div>
+  <h2>🔬 나의 카페인 반응 분석 결과</h2>
+
+  <p class="section-intro">
+    3페이지에서 입력한 생활 습관과 카페인 섭취 경험을 확인하고,
+    카페인 관련 유전자의 역할과 생활 습관 관리 방법을 알아봅시다.
+  </p>
+
+  <!-- 01 나의 응답 정보 -->
+
+  <div class="lab-card">
+    <div class="section-tag">01. MY PROFILE</div>
+    <h3>👤 나의 응답 정보</h3>
+    <p>내가 입력한 생활 습관을 먼저 확인해 보세요.</p>
+    <div id="profileResult">
+      <p>먼저 3페이지에서 정보를 입력해 주세요.</p>
+    </div>
+  </div>
+
+  <!-- 02 유전자 비교 -->
+
+  <div class="lab-card">
+    <div class="section-tag">02. GENETIC INFORMATION</div>
+    <h3>🧬 카페인 관련 유전자 비교</h3>
+
+    <div class="highlight">
+      <strong>먼저 알아두기</strong><br>
+      카페인 반응과 관련된 두 유전자는 서로 다른 역할을 합니다.
+      CYP1A2는 카페인 대사와, ADORA2A는 아데노신 수용체를 통한 신경계 반응과 관련됩니다.
+    </div>
+
+    <h3 style="margin-top:28px">⏱️ CYP1A2 — 카페인 대사</h3>
+
+    <p>
+      CYP1A2는 간에서 카페인 대사에 관여하는 효소를 만드는 유전자입니다.
+      이번 비교에서는 CYP1A2의 rs762551 변이를 살펴봅니다.
+      이 변이는 효소의 유도 정도와 관련이 있으며,
+      연구에서는 AA형이 AC·CC형보다 상대적으로 높은 효소 유도 및
+      빠른 카페인 대사 경향을 보이는 것으로 보고되어 있습니다.
+    </p>
+
+    <div class="gene-card" style="margin-top:18px">
+      <div class="gene-name">GENOTYPE 01</div>
+      <h3>AA형 — 상대적으로 빠른 대사 경향</h3>
+      <p>
+        rs762551의 AA형은 CYP1A2 효소의 유도 정도가 상대적으로 높게 나타날 수 있는
+        유전자형입니다. 효소 활성이 높아지면 간에서 카페인을 대사하는 과정이
+        상대적으로 빠르게 진행될 수 있습니다.
+        따라서 카페인이 체내에 머무는 시간이 비교적 짧아지는 경향과 관련됩니다.
+      </p>
+    </div>
+
+    <div class="gene-card">
+      <div class="gene-name">GENOTYPE 02</div>
+      <h3>AC·CC형 — 상대적으로 느린 대사 경향</h3>
+      <p>
+        AC·CC형은 AA형과 비교했을 때 CYP1A2 효소의 유도 정도가 상대적으로 낮게
+        나타날 수 있는 유전자형입니다. 이 경우 카페인 대사가 상대적으로 느리게
+        진행되어 카페인이 체내에 더 오래 남을 가능성이 있습니다.
+        다만 실제 효소 활성은 흡연, 약물, 호르몬 상태 등 환경적 요인의 영향도 받습니다.
+      </p>
+    </div>
+
+    <div class="highlight">
+      <strong>📊 나의 CYP1A2 관련 응답 경향</strong><br>
+      카페인 섭취 후 각성 효과가 오래 지속되는지, 섭취 빈도와 시간은 어떠한지를
+      반영하여 두 유전자형과 관련된 경향을 비교합니다.
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-heading">
+        <span>AA — 빠른 대사 관련 경향</span>
+        <span id="cypAAValue">50%</span>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="cypAABar" style="width:50%"></div>
+      </div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-heading">
+        <span>AC·CC — 느린 대사 관련 경향</span>
+        <span id="cypACValue">50%</span>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill second" id="cypACBar" style="width:50%"></div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>🔍 해석하기</strong><br>
+      각성 효과가 오래 지속된다는 응답은 카페인이 체내에 비교적 오래 남는 상황과
+      연결해 생각해 볼 수 있습니다. 그러나 각성 효과의 지속 시간은 섭취량이나
+      수면 상태 등에도 영향을 받으므로, 이 응답만으로 실제 CYP1A2 유전자형을
+      판단할 수는 없습니다.
+    </div>
+
+    <h3 style="margin-top:35px">🧠 ADORA2A — 아데노신 수용체 관련 반응</h3>
+
+    <p>
+      ADORA2A는 아데노신 A2A 수용체를 만드는 유전자입니다.
+      카페인은 이 수용체에 결합하여 아데노신의 작용을 방해하고 각성 효과를 나타냅니다.
+      rs5751876 변이는 카페인 섭취 후 불안감이나 수면 관련 반응의 개인차와
+      관련하여 연구되어 왔습니다.
+    </p>
+
+    <div class="gene-card" style="margin-top:18px">
+      <div class="gene-name">GENOTYPE 01</div>
+      <h3>CC형 — 상대적으로 낮은 민감도와 관련된 경향</h3>
+      <p>
+        일부 연구에서는 rs5751876의 CC형이 카페인 섭취 후 불안감이나 수면 방해와
+        관련된 반응이 상대적으로 적게 나타나는 경향과 관련된다고 보고했습니다.
+        이는 아데노신 A2A 수용체를 통한 신경계 반응의 개인차와 관련이 있을 수 있습니다.
+      </p>
+    </div>
+
+    <div class="gene-card">
+      <div class="gene-name">GENOTYPE 02</div>
+      <h3>CT·TT형 — 상대적으로 높은 민감도와 관련된 경향</h3>
+      <p>
+        일부 연구에서는 CT·TT형이 카페인 섭취 후 불안감이나 수면 방해와 관련된
+        반응을 더 크게 경험하는 경향과 관련될 수 있다고 제시했습니다.
+        다만 연구 결과가 일관되게 나타나는 것은 아니며,
+        이 유전자형을 가진 모든 사람이 카페인에 민감하게 반응하는 것은 아닙니다.
+      </p>
+    </div>
+
+    <div class="highlight">
+      <strong>📊 나의 ADORA2A 관련 응답 경향</strong><br>
+      카페인 섭취 후 잠들기 어려웠던 경험과 두근거림 또는 불안감을 느낀 경험을
+      반영하여 두 유전자형과 관련된 경향을 비교합니다.
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-heading">
+        <span>CC — 상대적으로 낮은 민감도 관련 경향</span>
+        <span id="adoraCCValue">50%</span>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="adoraCCBar" style="width:50%"></div>
+      </div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-heading">
+        <span>CT·TT — 상대적으로 높은 민감도 관련 경향</span>
+        <span id="adoraCTValue">50%</span>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill second" id="adoraCTBar" style="width:50%"></div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>🔍 두 유전자의 차이</strong><br>
+      CYP1A2는 간에서 카페인이 얼마나 빠르게 대사되는지와 관련되고,
+      ADORA2A는 아데노신 A2A 수용체를 통한 신경계 반응과 관련됩니다.
+      즉, 하나는 카페인의 대사 과정에, 다른 하나는 카페인이 뇌에서 작용하는 과정에
+      관여한다는 차이가 있습니다.
+    </div>
+
+    <div class="highlight">
+      <strong>📌 결과를 해석할 때 주의할 점</strong><br>
+      막대그래프는 입력한 설문 응답을 바탕으로 관련 연구에서 제시된 경향을
+      간단히 비교한 참고 점수입니다. 실제 유전자형이나 유전자형별 확률을
+      측정한 값은 아닙니다. 특히 ADORA2A와 카페인 민감도의 관계는 연구마다
+      결과에 차이가 있으므로 참고 자료로 해석해야 합니다.
+    </div>
+  </div>
+
+  <!-- 03 생활 습관 분석 -->
+
+  <div class="lab-card">
+    <div class="section-tag">03. MY LIFESTYLE ANALYSIS</div>
+    <h3>🌿 나의 생활 습관 분석</h3>
+    <p>입력한 생활 습관과 카페인 섭취 경험을 바탕으로 살펴볼 점을 확인해 보세요.</p>
+    <div id="personalAdvice">
+      <p>3페이지의 입력을 완료하면 개인별 분석이 표시됩니다.</p>
+    </div>
+  </div>
+
+  <!-- 04 퀴즈 -->
+
+  <div class="lab-card">
+    <div class="section-tag">04. SCIENCE QUIZ</div>
+    <h3>🧠 카페인과 유전자, 과학 개념 퀴즈</h3>
+    <p style="margin-bottom:15px">
+      일상 속 상황을 과학적으로 해석해 봅시다.
+      각 상황에서 더 적절한 설명을 선택해 주세요.
+    </p>
+
+    <div id="quizArea">
+      <p>아래 버튼을 눌러 퀴즈를 시작해 주세요.</p>
+      <button class="lab-button" onclick="startQuiz()">퀴즈 시작하기 →</button>
+    </div>
+  </div>
+
+  <div class="lab-page-nav">
+    <button onclick="goTo('page3')">← 3페이지로</button>
+    <button onclick="goTo('intro')">처음으로 돌아가기</button>
+  </div>
+
+</section>
+
+<section class="sources">
+  <h3>📚 참고 자료 및 출처</h3>
+  <a href="https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntnts_sn=6615" target="_blank">1. 질병관리청 국가건강정보포털 - 청소년의 카페인 음료 섭취</a>
+  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6212886/" target="_blank">2. Impact of Genetic Variability on Physiological Responses to Caffeine in Humans: A Systematic Review</a>
+  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11515775/" target="_blank">3. Genetic susceptibility to caffeine intake and metabolism: a systematic review (2024)</a>
+  <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank">4. National Center for Biotechnology Information (NCBI)</a>
+</section>
+
+</main>
+
+<footer>
+  CAFFEINE LAB<br>
+  Understanding Caffeine Through Science & Genetics<br>
+  <span>
+    본 프로그램은 교육 및 탐구 목적으로 제작되었으며,
+    의료적 진단이나 개인별 섭취 허용량을 결정하는 도구가 아닙니다.
+  </span>
+</footer>
+
+<script>
+function goTo(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+  }
+}
+
+let userData = null;
+
+/* 3페이지 입력값 저장 및 4페이지 연결 */
+
+document.getElementById('caffeineForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const drinks = Array.from(
+    document.querySelectorAll('input[name="drink"]:checked')
+  ).map(item => item.value);
+
+  userData = {
+    age:document.getElementById('userAge').value,
+    sleep:document.getElementById('userSleep').value,
+    drinks:drinks,
+    frequency:document.getElementById('drinkFrequency').value,
+    amount:document.getElementById('drinkAmount').value,
+    time:document.getElementById('drinkTime').value,
+    sleepEffect:document.querySelector('input[name="sleepEffect"]:checked').value,
+    anxietyEffect:document.querySelector('input[name="anxietyEffect"]:checked').value,
+    durationEffect:document.querySelector('input[name="durationEffect"]:checked').value
+  };
+
+  localStorage.setItem('caffeineUserData', JSON.stringify(userData));
+
+  showProfile();
+  showAdvice();
+  showGeneticResult();
+  goTo('page4');
+});
+
+/* 입력 정보 표시 */
+
+function showProfile() {
+  if (!userData) return;
+
+  const drinkText = userData.drinks.length
+    ? userData.drinks.join(', ')
+    : '선택한 음료 없음';
+
+  document.getElementById('profileResult').innerHTML = `
+    <div class="lab-grid">
+      <div class="result-item"><span>나이</span><strong>${userData.age}세</strong></div>
+      <div class="result-item"><span>평균 수면 시간</span><strong>${userData.sleep}시간</strong></div>
+      <div class="result-item"><span>주요 음료</span><strong>${drinkText}</strong></div>
+      <div class="result-item"><span>섭취 빈도</span><strong>${userData.frequency}</strong></div>
+      <div class="result-item"><span>하루 평균 섭취량</span><strong>${userData.amount}</strong></div>
+      <div class="result-item"><span>주요 섭취 시간</span><strong>${userData.time}</strong></div>
+    </div>
+  `;
+}
+
+/* 설문 응답을 반영한 유전자 관련 경향 비교 */
+
+function showGeneticResult() {
+  if (!userData) return;
+
+  /*
+    CYP1A2:
+    각성 효과가 오래 지속되는지, 섭취 빈도·양·시간을 반영합니다.
+    오래 지속되거나 섭취 빈도와 양이 높고 늦은 시간에 섭취할수록
+    AC·CC 관련 경향 점수를 높입니다.
+
+    ADORA2A:
+    불면과 불안·두근거림 경험을 반영합니다.
+    해당 반응을 경험했다고 응답할수록 CT·TT 관련 경향 점수를 높입니다.
+
+    아래 점수는 실제 유전자형 확률이 아니라 교육용 비교 점수입니다.
+  */
+
+  let cypSlowScore = 50;
+
+  if (userData.durationEffect === '오래 지속됨') {
+    cypSlowScore += 15;
+  } else if (userData.durationEffect === '짧게 지속됨') {
+    cypSlowScore -= 10;
+  }
+
+  if (userData.time === '저녁') {
+    cypSlowScore += 10;
+  } else if (userData.time === '오후') {
+    cypSlowScore += 5;
+  } else if (userData.time === '오전') {
+    cypSlowScore -= 5;
+  }
+
+  if (userData.frequency === '거의 매일') {
+    cypSlowScore += 5;
+  } else if (userData.frequency === '하루 여러 번') {
+    cypSlowScore += 10;
+  } else if (userData.frequency === '거의 마시지 않음') {
+    cypSlowScore -= 5;
+  }
+
+  if (userData.amount === '3잔 이상') {
+    cypSlowScore += 5;
+  }
+
+  cypSlowScore = Math.max(20, Math.min(80, cypSlowScore));
+
+  const cypFastScore = 100 - cypSlowScore;
+
+  let adoraSensitiveScore = 50;
+
+  if (userData.sleepEffect === '있음') {
+    adoraSensitiveScore += 15;
+  } else if (userData.sleepEffect === '없음') {
+    adoraSensitiveScore -= 5;
+  }
+
+  if (userData.anxietyEffect === '있음') {
+    adoraSensitiveScore += 20;
+  } else if (userData.anxietyEffect === '없음') {
+    adoraSensitiveScore -= 5;
+  }
+
+  adoraSensitiveScore = Math.max(20, Math.min(80, adoraSensitiveScore));
+
+  const adoraLessSensitiveScore = 100 - adoraSensitiveScore;
+
+  document.getElementById('cypAAValue').textContent = cypFastScore + '%';
+  document.getElementById('cypACValue').textContent = cypSlowScore + '%';
+
+  document.getElementById('cypAABar').style.width = cypFastScore + '%';
+  document.getElementById('cypACBar').style.width = cypSlowScore + '%';
+
+  document.getElementById('adoraCCValue').textContent = adoraLessSensitiveScore + '%';
+  document.getElementById('adoraCTValue').textContent = adoraSensitiveScore + '%';
+
+  document.getElementById('adoraCCBar').style.width = adoraLessSensitiveScore + '%';
+  document.getElementById('adoraCTBar').style.width = adoraSensitiveScore + '%';
+}
+
+/* 개인별 생활 습관 분석 */
+
+function showAdvice() {
+  if (!userData) return;
+
+  const advice = [];
+  const sleep = Number(userData.sleep);
+
+  if (sleep < 8) {
+    advice.push(`
+      <h3>수면 습관</h3>
+      <p>
+        평균 수면 시간이 ${sleep}시간이라고 입력했습니다.
+        수면이 부족하면 피로감을 느낄 수 있으므로 카페인으로 졸음을 버티기보다
+        규칙적인 수면 시간을 확보하는 것이 중요합니다.
+      </p>
+    `);
+  } else {
+    advice.push(`
+      <h3>수면 습관</h3>
+      <p>
+        평균 수면 시간은 ${sleep}시간이라고 입력했습니다.
+        수면 시간뿐 아니라 수면의 규칙성과 질도 함께 살펴보세요.
+      </p>
+    `);
+  }
+
+  if (userData.time === '저녁') {
+    advice.push(`
+      <h3>카페인 섭취 시간</h3>
+      <p>
+        저녁 시간에 카페인을 섭취한다고 응답했습니다.
+        카페인은 섭취 후에도 체내에 남아 수면에 영향을 줄 수 있으므로
+        늦은 시간의 섭취를 피하는 방향으로 습관을 조정해 보세요.
+      </p>
+    `);
+  } else if (userData.time === '오후') {
+    advice.push(`
+      <h3>카페인 섭취 시간</h3>
+      <p>
+        오후에 카페인을 섭취한다고 응답했습니다.
+        개인에 따라 카페인의 작용이 수면 시간까지 이어질 수 있으므로
+        섭취 시간과 이후의 수면 상태를 함께 관찰해 보세요.
+      </p>
+    `);
+  } else {
+    advice.push(`
+      <h3>카페인 섭취 시간</h3>
+      <p>
+        카페인 섭취 시간에 따라 수면에 미치는 영향이 달라질 수 있습니다.
+        섭취 시간과 이후의 수면 상태를 함께 살펴보세요.
+      </p>
+    `);
+  }
+
+  if (userData.sleepEffect === '있음') {
+    advice.push(`
+      <h3>수면 관련 반응</h3>
+      <p>
+        카페인 섭취 후 잠들기 어려웠던 경험이 있다고 응답했습니다.
+        섭취량과 시간을 살펴보고 늦은 시간의 섭취를 피하는 방향으로
+        생활 습관을 조정해 보세요.
+      </p>
+    `);
+  }
+
+  if (userData.anxietyEffect === '있음') {
+    advice.push(`
+      <h3>신체 반응</h3>
+      <p>
+        카페인 섭취 후 두근거림이나 불안감을 경험했다고 응답했습니다.
+        이러한 반응이 반복된다면 카페인 섭취를 피하고,
+        증상이 지속되거나 걱정된다면 보호자나 의료 전문가와 상의하세요.
+      </p>
+    `);
+  }
+
+  if (userData.amount === '3잔 이상' || userData.frequency === '하루 여러 번') {
+    advice.push(`
+      <h3>섭취 빈도</h3>
+      <p>
+        카페인 음료를 여러 번 섭취한다고 응답했습니다.
+        음료마다 카페인 함량이 다르므로 제품 표시를 확인하고,
+        여러 종류의 카페인 음료를 겹쳐 마시지 않도록 주의하세요.
+      </p>
+    `);
+  }
+
+  if (userData.drinks.includes('에너지 음료')) {
+    advice.push(`
+      <h3>음료 종류</h3>
+      <p>
+        에너지 음료를 섭취한다고 응답했습니다.
+        제품마다 카페인 함량이 다르므로 성분표를 확인하고,
+        다른 카페인 음료와 함께 섭취하지 않도록 주의하세요.
+      </p>
+    `);
+  }
+
+  if (userData.durationEffect === '오래 지속됨') {
+    advice.push(`
+      <h3>각성 효과 지속 시간</h3>
+      <p>
+        카페인의 각성 효과가 오래 지속된다고 느낀다고 응답했습니다.
+        카페인 섭취 시간과 수면 상태를 함께 기록해 반응의 변화를 살펴보세요.
+      </p>
+    `);
+  }
+
+  document.getElementById('personalAdvice').innerHTML =
+    advice.map(item => `<div class="highlight">${item}</div>`).join('');
+}
+
+/* 저장된 정보 불러오기 */
+
+window.addEventListener('load', function() {
+  const saved = localStorage.getItem('caffeineUserData');
+
+  if (saved) {
+    try {
+      userData = JSON.parse(saved);
+      showProfile();
+      showAdvice();
+      showGeneticResult();
+    } catch (error) {
+      localStorage.removeItem('caffeineUserData');
+    }
+  }
+});
+
+/* 과학 개념 퀴즈 */
+
+const quizQuestions = [
+  {
+    question:'① 카페인 대사 속도가 빠른 사람에게 나타날 수 있는 특징은?',
+    A:'간에서 카페인이 상대적으로 빠르게 대사될 수 있다.',
+    B:'아데노신 수용체가 카페인에 더 민감하게 반응한다.',
+    answer:'A',
+    explanation:'CYP1A2는 간에서 카페인 대사에 관여하는 효소입니다. 효소 활성이 높으면 카페인이 상대적으로 빠르게 대사될 수 있습니다.',
+    wrong:'아데노신 수용체의 민감도는 CYP1A2의 대사 기능과 다른 과정입니다.'
+  },
+  {
+    question:'② 카페인이 졸음을 줄이는 원리로 가장 적절한 것은?',
+    A:'카페인이 아데노신을 직접 분해하기 때문이다.',
+    B:'카페인이 아데노신 수용체에 결합해 아데노신의 작용을 방해하기 때문이다.',
+    answer:'B',
+    explanation:'카페인은 아데노신 수용체에 결합하여 아데노신이 수용체에 결합하는 것을 방해합니다.',
+    wrong:'카페인이 아데노신을 직접 분해하는 것은 아닙니다.'
+  },
+  {
+    question:'③ ADORA2A 유전자가 카페인 반응과 관련되는 이유는?',
+    A:'아데노신 A2A 수용체를 만드는 유전자이기 때문이다.',
+    B:'간에서 카페인을 분해하는 효소를 만드는 유전자이기 때문이다.',
+    answer:'A',
+    explanation:'ADORA2A는 아데노신 A2A 수용체를 만드는 유전자이며, 카페인의 신경계 작용과 관련됩니다.',
+    wrong:'간에서 카페인 대사에 중요한 역할을 하는 효소는 CYP1A2와 관련됩니다.'
+  },
+  {
+    question:'④ CYP1A2와 ADORA2A의 역할을 올바르게 연결한 것은?',
+    A:'CYP1A2는 대사, ADORA2A는 수용체 관련 반응과 관련된다.',
+    B:'CYP1A2는 수용체 형성, ADORA2A는 간에서의 대사와 관련된다.',
+    answer:'A',
+    explanation:'CYP1A2는 카페인 대사 과정, ADORA2A는 아데노신 A2A 수용체를 통한 반응과 관련됩니다.',
+    wrong:'두 유전자의 역할을 서로 바꾸어 이해한 설명입니다.'
+  },
+  {
+    question:'⑤ 같은 유전자형을 가진 사람이라도 카페인 반응이 다를 수 있는 이유는?',
+    A:'유전자형이 같으면 생활 습관과 관계없이 반응도 항상 같기 때문이다.',
+    B:'수면, 섭취량, 섭취 시간 등 환경적 요인도 반응에 영향을 주기 때문이다.',
+    answer:'B',
+    explanation:'카페인 반응은 유전적 요인뿐 아니라 수면 습관, 섭취량, 섭취 시간 등 다양한 요인의 영향을 받습니다.',
+    wrong:'유전자형만으로 개인의 실제 반응을 완벽하게 설명할 수는 없습니다.'
+  }
+];
+
+let quizIndex = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+function startQuiz() {
+  quizIndex = 0;
+  quizScore = 0;
+  quizAnswered = false;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  quizAnswered = false;
+  const q = quizQuestions[quizIndex];
+
+  document.getElementById('quizArea').innerHTML = `
+    <div class="section-tag">QUESTION ${quizIndex + 1} / ${quizQuestions.length}</div>
+    <h3>${q.question}</h3>
+
+    <button class="quiz-option" onclick="answerQuiz('A')">
+      A. ${q.A}
+    </button>
+
+    <button class="quiz-option" onclick="answerQuiz('B')">
+      B. ${q.B}
+    </button>
+
+    <p style="color:var(--muted);font-size:12px;margin-top:13px">
+      정답을 선택하면 해설이 표시됩니다.
+    </p>
+  `;
+}
+
+function answerQuiz(choice) {
+  if (quizAnswered) return;
+
+  quizAnswered = true;
+  const q = quizQuestions[quizIndex];
+  const correct = choice === q.answer;
+
+  if (correct) quizScore++;
+
+  const feedback = correct
+    ? `<strong>정답입니다!</strong><br>${q.explanation}`
+    : `<strong>정답은 ${q.answer}입니다.</strong><br>${q.wrong}<br><br>${q.explanation}`;
+
+  document.getElementById('quizArea').innerHTML += `
+    <div class="quiz-feedback">${feedback}</div>
+    <button class="lab-button" onclick="nextQuestion()">
+      ${quizIndex === quizQuestions.length - 1 ? '결과 확인하기' : '다음 문제 →'}
+    </button>
+  `;
+}
+
+function nextQuestion() {
+  quizIndex++;
+
+  if (quizIndex < quizQuestions.length) {
+    renderQuestion();
+  } else {
+    showQuizResult();
+  }
+}
+
+function showQuizResult() {
+  let message = '';
+
+  if (quizScore === 5) {
+    message = '모든 개념을 정확하게 이해했어요!';
+  } else if (quizScore >= 3) {
+    message = '핵심 개념을 잘 이해하고 있어요. 틀린 문제의 해설을 다시 살펴보세요.';
+  } else {
+    message = '카페인의 작용 원리와 두 유전자의 역할을 다시 확인해 보세요.';
+  }
+
+  document.getElementById('quizArea').innerHTML = `
+    <div class="diagram">
+      <div class="section-tag">QUIZ COMPLETE</div>
+      <h2 style="color:var(--brown)">${quizScore} / 5점</h2>
+      <p style="color:var(--muted);margin-top:10px">${message}</p>
+    </div>
+    <button class="lab-button" onclick="startQuiz()">다시 풀어보기</button>
+  `;
+}
+</script>
+
+</body>
+</html>
